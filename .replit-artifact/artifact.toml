@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Zenter Colombia"
+version = "1.0.0"
+id = "artifacts/zenter-colombia"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18546
+
+[services.development]
+run = "pnpm --filter @workspace/zenter-colombia run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/zenter-colombia", "run", "build" ]
+publicDir = "artifacts/zenter-colombia/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18546"
+BASE_PATH = "/"
